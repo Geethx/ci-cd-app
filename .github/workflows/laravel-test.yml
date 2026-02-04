@@ -8,7 +8,7 @@ jobs:
 
     steps:
       - name: Checkout_code
-        ses: actions/checkout
+        uses: actions/checkout@v4
 
       - name: Install PHP
         uses: shivammathur/setup-php@v2
@@ -17,4 +17,7 @@ jobs:
           extensions: mbstring, pdo_mysql, bcmath
 
       - name: Confiq env file
-        user: php -r "file_exists('.env' || copy('.env.example', '.env'));"
+        run: php -r "file_exists('.env' || copy('.env.example', '.env'));"
+
+      - name: Install Composer
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
